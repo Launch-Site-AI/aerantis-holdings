@@ -18,7 +18,7 @@ export const brand = {
   tagline: 'Investment • Holdings • Management',
   description:
     'Excellence • Vision • Growth',
-  url: 'https://aerantishildimgs.com.au',
+  url: 'https://aerantisholdings.com.au',
   locale: 'en_US',
 
   // ── Fonts ──────────────────────────────────────────────────────────────────

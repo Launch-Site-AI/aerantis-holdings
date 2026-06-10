@@ -12,7 +12,7 @@
 
 export const client = {
   name: 'AERANTIS HOLDINGS',
-  email: 'info@aerantishildimgs.com.au',
+  email: 'info@aerantisholdings.com.au',
   phoneForTel: '+61499695097',
   phoneFormatted: '0 499 695 097',
   /** Business / contractor license number. Displayed in the header and footer
@@ -32,7 +32,7 @@ export const client = {
     instagram: 'https://www.instagram.com/',
     google: 'https://www.google.com/maps',
   },
-  domain: 'https://aerantishildimgs.com.au',
+  domain: 'https://aerantisholdings.com.au',
 } as const;
 
 export type Client = typeof client;
