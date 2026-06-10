@@ -30,6 +30,7 @@ const currentPath = stripBase(Astro.url.pathname);
 
 <header
   class="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-sm"
+  data-base-url={baseUrl}
   transition:persist
 >
   <div class="mx-auto flex max-w-site items-center justify-between px-4 py-3 sm:px-6">
@@ -169,8 +170,43 @@ const currentPath = stripBase(Astro.url.pathname);
     const activeClasses = ['bg-primary/10', 'text-primary'];
     const inactiveDesktop = ['text-text-muted', 'hover:text-text'];
     const inactiveMobile = ['text-text-muted', 'hover:text-text', 'hover:bg-surface'];
+    const baseUrl = header.dataset.baseUrl || '/';
 
     const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
+
+    /** @param {string} rawPath */
+    const normalizePath = (rawPath) => {
+      if (!rawPath) return '/';
+      let path = rawPath;
+
+      if (/^[a-zA-Z]+:/.test(path)) {
+        try {
+          path = new URL(path, window.location.origin).pathname;
+        } catch {
+          return '';
+        }
+      }
+
+      if (!path.startsWith('/')) return '';
+
+      if (baseUrl !== '/' && path.startsWith(baseUrl)) {
+        const stripped = path.slice(baseUrl.length);
+        path = stripped ? `/${stripped.replace(/^\/+/, '')}` : '/';
+      }
+
+      const collapsed = path.replace(/\/+/g, '/');
+      return collapsed.length > 1 ? collapsed.replace(/\/+$/, '') : collapsed;
+    };
+
+    /**
+     * @param {string} href
+     * @param {string} currentPath
+     */
+    const isPathActive = (href, currentPath) => {
+      if (!href) return false;
+      if (href === '/') return currentPath === '/';
+      return currentPath === href || currentPath.startsWith(`${href}/`);
+    };
 
     const setMenuOpen = (nextOpen: boolean) => {
       // Hard stop: hamburger/drawer behavior is mobile-only.
@@ -181,14 +217,14 @@ const currentPath = stripBase(Astro.url.pathname);
       iconClose.classList.toggle('hidden', !nextOpen);
     };
 
-    function syncActiveLinks() {
-      const path = window.location.pathname;
+    function syncActiveLinks(nextPath = window.location.pathname) {
+      const path = normalizePath(nextPath);
       const desktopLinks = header.querySelectorAll('nav[aria-label="Primary navigation"] a');
       const mobileLinks = header.querySelectorAll('#mobile-menu nav a');
 
       desktopLinks.forEach((link) => {
-        const href = link.getAttribute('href') || '';
-        const isActive = href === path || (href !== '/' && path.startsWith(href));
+        const href = normalizePath(link.getAttribute('href') || '');
+        const isActive = isPathActive(href, path);
         link.classList.toggle(activeClasses[0], isActive);
         link.classList.toggle(activeClasses[1], isActive);
         link.classList.toggle(inactiveDesktop[0], !isActive);
@@ -198,8 +234,8 @@ const currentPath = stripBase(Astro.url.pathname);
       });
 
       mobileLinks.forEach((link) => {
-        const href = link.getAttribute('href') || '';
-        const isActive = href === path || (href !== '/' && path.startsWith(href));
+        const href = normalizePath(link.getAttribute('href') || '');
+        const isActive = isPathActive(href, path);
         link.classList.toggle(activeClasses[0], isActive);
         link.classList.toggle(activeClasses[1], isActive);
         link.classList.toggle(inactiveMobile[0], !isActive);
@@ -222,11 +258,20 @@ const currentPath = stripBase(Astro.url.pathname);
       if (target.closest('a[href]')) setMenuOpen(false);
     });
 
+    header.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const navLink = target.closest('nav[aria-label="Primary navigation"] a, #mobile-menu nav a');
+      if (!(navLink instanceof HTMLAnchorElement)) return;
+      syncActiveLinks(navLink.getAttribute('href') || window.location.pathname);
+    });
+
     document.addEventListener('astro:before-preparation', () => setMenuOpen(false));
     document.addEventListener('astro:after-swap', () => {
       setMenuOpen(false);
       syncActiveLinks();
     });
+    document.addEventListener('astro:page-load', () => syncActiveLinks());
 
     // Ensure mobile drawer can't stay open if viewport changes to desktop.
     window.addEventListener('resize', () => setMenuOpen(false));
