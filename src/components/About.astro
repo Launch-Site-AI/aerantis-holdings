@@ -49,15 +49,27 @@ const resolvedCtaHref = ctaHref.startsWith('/') ? withBase(ctaHref) : ctaHref;
 
     <!-- Image -->
     <div class="overflow-hidden rounded-lg shadow-lg">
-      <Image
-        src={imageSrc}
-        alt={imageAlt}
-        width={700}
-        height={525}
-        loading="lazy"
-        decoding="async"
-        class="size-full object-cover"
-      />
+      {typeof imageSrc === 'string' ? (
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          width={700}
+          height={525}
+          loading="lazy"
+          decoding="async"
+          class="size-full object-cover"
+        />
+      ) : (
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          width={700}
+          height={525}
+          loading="lazy"
+          decoding="async"
+          class="size-full object-cover"
+        />
+      )}
     </div>
 
     <!-- Content -->
