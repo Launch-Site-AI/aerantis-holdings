@@ -27,7 +27,10 @@ const {
 } = Astro.props;
 
 const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
-const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`;
+const withBase = (path: string) => {
+  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  return `${normalizedBase}${path.replace(/^\/+/, '')}`;
+};
 const pageTitle = title === brand.name ? title : `${title} — ${brand.name}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? brand.url);
 const imageURL = image.startsWith('/') ? withBase(image) : image;
