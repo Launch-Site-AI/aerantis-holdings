@@ -14,11 +14,11 @@
 
 export const brand = {
   // ── Site Identity ──────────────────────────────────────────────────────────
-  name: 'Small Business Starter',
-  tagline: 'Professional service you can trust.',
+  name: 'AERANTIS HOLDINGS',
+  tagline: 'Investment • Holdings • Management',
   description:
-    'A fast, mobile-first small-business website template built with Astro 6 and Tailwind v4. Fully customisable for any trade or service business.',
-  url: 'https://example.com',
+    'Excellence • Vision • Growth',
+  url: 'https://aerantishildimgs.com.au',
   locale: 'en_US',
 
   // ── Fonts ──────────────────────────────────────────────────────────────────

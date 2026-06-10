@@ -3,6 +3,7 @@ import { brand } from '../config/brand';
 import { client } from '../data/client';
 
 const year = new Date().getFullYear();
+const displayDomain = client.domain.replace(/^https?:\/\//, '');
 
 const navCols = [
   {
@@ -37,6 +38,17 @@ const navCols = [
         <p class="mt-3 max-w-xs text-sm leading-relaxed">
           {brand.tagline}
         </p>
+        <ul class="mt-4 space-y-1 text-sm">
+          <li>
+            <a href={`mailto:${client.email}`} class="transition-colors hover:text-white">✉ {client.email}</a>
+          </li>
+          <li>
+            <a href={client.domain} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-white">🌐 {displayDomain}</a>
+          </li>
+          <li>
+            <a href={`tel:${client.phoneForTel}`} class="transition-colors hover:text-white">☎ {client.phoneFormatted}</a>
+          </li>
+        </ul>
 
         <!-- Social links -->
         <div class="mt-5 flex items-center gap-4">
@@ -80,12 +92,17 @@ const navCols = [
         <ul class="mt-3 space-y-2 text-sm">
           <li>
             <a href={`tel:${client.phoneForTel}`} class="transition-colors hover:text-white">
-              {client.phoneFormatted}
+              ☎ {client.phoneFormatted}
             </a>
           </li>
           <li>
             <a href={`mailto:${client.email}`} class="transition-colors hover:text-white">
-              {client.email}
+              ✉ {client.email}
+            </a>
+          </li>
+          <li>
+            <a href={client.domain} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-white">
+              🌐 {displayDomain}
             </a>
           </li>
           <li>

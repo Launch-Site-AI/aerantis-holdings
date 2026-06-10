@@ -92,14 +92,21 @@ import { client } from '../../data/client';
         <div>
           <h3 class="font-heading text-lg font-semibold text-text">Call Us</h3>
           <a href={`tel:${client.phoneForTel}`} class="mt-1 block text-primary-light font-medium transition-colors hover:text-primary">
-            {client.phoneFormatted}
+            ☎ {client.phoneFormatted}
           </a>
         </div>
 
         <div>
           <h3 class="font-heading text-lg font-semibold text-text">Email Us</h3>
           <a href={`mailto:${client.email}`} class="mt-1 block text-primary-light font-medium transition-colors hover:text-primary">
-            {client.email}
+            ✉ {client.email}
+          </a>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold text-text">Website</h3>
+          <a href={client.domain} target="_blank" rel="noopener noreferrer" class="mt-1 block text-primary-light font-medium transition-colors hover:text-primary">
+            🌐 {client.domain.replace(/^https?:\/\//, '')}
           </a>
         </div>
 

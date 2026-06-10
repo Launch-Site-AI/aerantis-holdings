@@ -11,13 +11,13 @@
  */
 
 export const client = {
-  name: 'Small Business Starter',
-  email: 'hello@example.com',
-  phoneForTel: '555-867-5309',
-  phoneFormatted: '(555) 867-5309',
+  name: 'AERANTIS HOLDINGS',
+  email: 'info@aerantishildimgs.com.au',
+  phoneForTel: '+61499695097',
+  phoneFormatted: '0 499 695 097',
   /** Business / contractor license number. Displayed in the header and footer
    *  as a trust signal. Set to an empty string to hide it. */
-  license: 'Lic# 123456',
+  license: '',
   address: {
     lineOne: '123 Main Street',
     lineTwo: 'Suite 100',
@@ -32,7 +32,7 @@ export const client = {
     instagram: 'https://www.instagram.com/',
     google: 'https://www.google.com/maps',
   },
-  domain: 'https://www.example.com',
+  domain: 'https://aerantishildimgs.com.au',
 } as const;
 
 export type Client = typeof client;
