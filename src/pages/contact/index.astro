@@ -5,6 +5,9 @@ import Footer from '../../components/Footer.astro';
 import Banner from '../../components/Banner.astro';
 import { brand } from '../../config/brand';
 import { client } from '../../data/client';
+
+const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
+const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`;
 ---
 
 <BaseLayout title="Contact" description={`Get in touch with ${brand.name}. Request a free quote or ask us a question.`}>
@@ -27,7 +30,7 @@ import { client } from '../../data/client';
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
-          action="/contact/success"
+          action={withBase('/contact/success')}
           class="flex flex-col gap-5"
         >
           <input type="hidden" name="form-name" value="contact" />

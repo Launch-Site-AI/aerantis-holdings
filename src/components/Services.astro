@@ -34,6 +34,10 @@ const {
     { title: 'Maintenance Plans',    description: 'Scheduled preventive maintenance to protect your property and avoid surprise repair bills.', href: '/services' },
   ],
 } = Astro.props;
+
+const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
+const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`;
+const resolveHref = (href: string) => (href.startsWith('/') ? withBase(href) : href);
 ---
 
 <section class="bg-surface py-section">
@@ -48,7 +52,7 @@ const {
       {services.map((service, i) => (
         <li>
           <a
-            href={service.href || '/services'}
+            href={resolveHref(service.href || '/services')}
             aria-label={`Learn more about ${service.title}`}
             class="group flex h-full cursor-pointer flex-col rounded-lg border border-border bg-background p-6 shadow-sm transition-shadow duration-200 hover:shadow-md"
           >

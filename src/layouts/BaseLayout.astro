@@ -26,8 +26,11 @@ const {
   schema,
 } = Astro.props;
 
+const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
+const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`;
 const pageTitle = title === brand.name ? title : `${title} — ${brand.name}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? brand.url);
+const imageURL = image.startsWith('/') ? withBase(image) : image;
 ---
 
 <html lang={brand.locale.split('_')[0]} class="scroll-smooth">
@@ -45,18 +48,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? brand.url);
     <meta property="og:url"         content={canonicalURL} />
     <meta property="og:title"       content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image"       content={image} />
+    <meta property="og:image"       content={imageURL} />
     <meta property="og:locale"      content={brand.locale} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:title"       content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image"       content={image} />
+    <meta name="twitter:image"       content={imageURL} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="icon" href={withBase('/favicon.ico')} />
 
     <!-- Fonts -->
     <Font cssVariable="--font-display" preload />

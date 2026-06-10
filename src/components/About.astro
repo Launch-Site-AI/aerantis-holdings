@@ -35,6 +35,10 @@ const {
   imageSrc = localAboutImage ?? PLACEHOLDER,
   imageAlt = 'Friendly professional team on a job site',
 } = Astro.props;
+
+const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
+const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`;
+const resolvedCtaHref = ctaHref.startsWith('/') ? withBase(ctaHref) : ctaHref;
 ---
 
 <section class="py-section">
@@ -76,7 +80,7 @@ const {
 
       <div class="pt-2">
         <a
-          href={ctaHref}
+          href={resolvedCtaHref}
           class="inline-flex min-h-[44px] items-center gap-2 rounded-md bg-primary px-6 py-3 text-base font-bold text-primary-fg shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           {ctaLabel}
