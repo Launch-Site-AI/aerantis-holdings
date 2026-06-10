@@ -16,7 +16,10 @@ const {
 } = Astro.props;
 
 const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
-const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`;
+const withBase = (path: string) => {
+  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  return `${normalizedBase}${path.replace(/^\/+/, '')}`;
+};
 const resolvedButtonHref = buttonHref.startsWith('/') ? withBase(buttonHref) : buttonHref;
 ---
 

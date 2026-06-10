@@ -20,7 +20,10 @@ const formattedDate = date.toLocaleDateString('en-US', {
 });
 
 const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
-const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`;
+const withBase = (path: string) => {
+  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  return `${normalizedBase}${path.replace(/^\/+/, '')}`;
+};
 ---
 
 <BaseLayout title={title} description={description}>

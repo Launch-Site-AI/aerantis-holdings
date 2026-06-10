@@ -5,7 +5,10 @@ import { client } from '../data/client';
 const year = new Date().getFullYear();
 const displayDomain = client.domain.replace(/^https?:\/\//, '');
 const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
-const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`;
+const withBase = (path: string) => {
+  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  return `${normalizedBase}${path.replace(/^\/+/, '')}`;
+};
 
 const navCols = [
   {
