@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Banner from '../components/Banner.astro';
+import Projects from '../components/Projects.astro';
+import CTA from '../components/CTA.astro';
+import { brand } from '../config/brand';
+---
+
+<BaseLayout title="Projects" description={`Selected projects by ${brand.name}.`}>
+  <Header slot="header" />
+
+  <Banner title="Projects" />
+
+  <Projects
+    topper="Portfolio"
+    heading="Selected Projects"
+    description="A selection of engagements delivered with discretion and long-term intent. TODO(owner): supply portfolio lede."
+    ctaLabel={null}
+  />
+
+  <CTA />
+
+  <Footer slot="footer" />
+</BaseLayout>

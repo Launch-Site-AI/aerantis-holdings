@@ -4,43 +4,60 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
-import Services from '../components/Services.astro';
 import About from '../components/About.astro';
-import Reviews from '../components/Reviews.astro';
-import Gallery from '../components/Gallery.astro';
+import Services from '../components/Services.astro';
+import Projects from '../components/Projects.astro';
 import CTA from '../components/CTA.astro';
 import { brand } from '../config/brand';
 import { client } from '../data/client';
+
+const hasConfirmedAddress =
+  client.address.lineOne && !client.address.lineOne.startsWith('TODO(');
+const hasConfirmedPhone =
+  client.phoneForTel && !client.phoneForTel.startsWith('TODO(');
+
+// TODO(owner): confirm best schema.org @type — Organization vs
+// RealEstateAgent vs ProfessionalService.
+const schema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: client.name,
+  email: client.email,
+  url: client.domain,
+};
+if (hasConfirmedPhone) schema.telephone = client.phoneForTel;
+if (hasConfirmedAddress) {
+  schema.address = {
+    '@type': 'PostalAddress',
+    streetAddress: client.address.lineOne,
+    addressLocality: client.address.city,
+    addressRegion: client.address.state,
+    postalCode: client.address.zip,
+    addressCountry: client.address.country,
+  };
+}
 ---
 
 <BaseLayout
   title={brand.name}
   description={brand.description}
-  schema={{
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: client.name,
-    telephone: client.phoneForTel,
-    email: client.email,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: client.address.lineOne,
-      addressLocality: client.address.city,
-      addressRegion: client.address.state,
-      postalCode: client.address.zip,
-      addressCountry: client.address.country,
-    },
-    url: client.domain,
-  }}
+  schema={schema}
 >
-  <Header slot="header" />
+  <Header slot="header" transparent />
 
-  <Hero />
+  <Hero
+    topper="Professional Property Solutions"
+    headingLines={['Creating Value.', 'Inspiring Confidence.']}
+    description={brand.description}
+    ctaLabel="Request a Consultation"
+    ctaHref="/contact"
+    secondaryLabel="Explore Services"
+    secondaryHref="/services"
+  />
   <TrustBar />
-  <Services />
   <About />
-  <Reviews />
-  <Gallery />
+  <Services />
+  <Projects />
   <CTA />
 
   <Footer slot="footer" />
