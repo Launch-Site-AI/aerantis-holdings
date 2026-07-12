@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }]],
 
   use: {
-    baseURL: 'http://localhost:4321',
+    baseURL: 'http://localhost:4321/aerantis-holdings',
     trace: 'on-first-retry',
   },
 
@@ -22,7 +22,7 @@ export default defineConfig({
 
   webServer: {
     command: 'pnpm build && pnpm preview',
-    url: 'http://localhost:4321',
+    url: 'http://localhost:4321/aerantis-holdings/',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
