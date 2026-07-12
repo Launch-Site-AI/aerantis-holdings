@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { brand } from '../../config/brand';
 
 const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
 const withBase = (path: string) => {
@@ -14,25 +13,33 @@ const withBase = (path: string) => {
 <BaseLayout title="Message Sent" description="Your message has been received.">
   <Header slot="header" />
 
-  <section class="flex min-h-[60vh] items-center justify-center px-4">
+  <section class="flex min-h-[70vh] items-center justify-center bg-background px-4 py-section">
     <div class="mx-auto max-w-md text-center">
-      <div class="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-accent/10">
-        <svg class="size-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      <div class="mx-auto mb-8 flex size-16 items-center justify-center border border-primary text-primary">
+        <svg class="size-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
         </svg>
       </div>
 
-      <h1 class="font-heading text-h1 font-bold uppercase text-text">
+      <span class="inline-flex items-center gap-3 text-topper font-semibold uppercase tracking-[0.28em] text-primary">
+        <span class="h-px w-8 bg-primary/60" aria-hidden="true"></span>
+        Thank You
+        <span class="h-px w-8 bg-primary/60" aria-hidden="true"></span>
+      </span>
+      <h1 class="mt-4 font-heading text-h1 font-medium leading-tight text-text">
         Message Received
       </h1>
       <p class="mt-4 text-text-muted leading-relaxed">
-        Thank you for reaching out. We'll get back to you within one business day.
+        Thank you for reaching out. Aerantis will be in touch shortly.
       </p>
       <a
         href={withBase('/')}
-        class="mt-8 inline-flex min-h-[44px] items-center justify-center rounded-md bg-primary px-8 py-3 text-base font-bold text-primary-fg shadow-sm transition-opacity hover:opacity-90"
+        class="group mt-10 inline-flex min-h-[48px] items-center justify-center gap-3 border border-primary bg-primary px-10 py-3 text-sm font-semibold uppercase tracking-[0.28em] text-near-black transition-colors hover:bg-primary-light hover:border-primary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         Back to Home
+        <svg class="size-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
       </a>
     </div>
   </section>

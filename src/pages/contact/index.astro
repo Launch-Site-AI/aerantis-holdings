@@ -11,21 +11,32 @@ const withBase = (path: string) => {
   const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
   return `${normalizedBase}${path.replace(/^\/+/, '')}`;
 };
+
+const hasConfirmedAddress =
+  client.address.lineOne && !client.address.lineOne.startsWith('TODO(');
+
+const inputClass =
+  'min-h-[48px] w-full border border-primary/30 bg-surface px-4 py-3 text-text placeholder:text-text-muted transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/60';
 ---
 
-<BaseLayout title="Contact" description={`Get in touch with ${brand.name}. Request a free quote or ask us a question.`}>
+<BaseLayout title="Contact" description={`Request a consultation with ${brand.name}.`}>
   <Header slot="header" />
 
-  <Banner title="Contact Us" />
+  <Banner title="Contact" />
 
-  <section class="py-section">
-    <div class="mx-auto grid max-w-site grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-5 lg:gap-14">
+  <section class="bg-background py-section">
+    <div class="mx-auto grid max-w-site grid-cols-1 gap-14 px-4 sm:px-6 lg:grid-cols-5 lg:gap-16">
 
-      <!-- Form -->
       <div class="lg:col-span-3">
-        <h2 class="font-heading text-h2 font-bold uppercase text-text">Send us a message</h2>
-        <p class="mt-2 mb-8 text-text-muted">
-          Fill out the form below and we'll get back to you within one business day.
+        <span class="inline-flex items-center gap-3 text-topper font-semibold uppercase tracking-[0.28em] text-primary">
+          <span class="h-px w-8 bg-primary/60" aria-hidden="true"></span>
+          Get in Touch
+        </span>
+        <h2 class="mt-4 font-heading text-h2 font-medium leading-tight text-text">
+          Request a Consultation
+        </h2>
+        <p class="mt-4 mb-10 text-text-muted leading-relaxed">
+          Share a few details and Aerantis will be in touch to arrange an initial conversation. TODO(owner): finalise wording and expected response window.
         </p>
 
         <form
@@ -34,109 +45,128 @@ const withBase = (path: string) => {
           data-netlify="true"
           netlify-honeypot="bot-field"
           action={withBase('/contact/success')}
-          class="flex flex-col gap-5"
+          class="flex flex-col gap-6"
         >
           <input type="hidden" name="form-name" value="contact" />
           <p class="hidden" aria-hidden="true">
             <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
           </p>
 
-          <label class="flex flex-col gap-1.5">
-            <span class="text-sm font-medium text-text">Name <span class="text-accent" aria-hidden="true">*</span></span>
+          <label class="flex flex-col gap-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Name <span class="text-primary-light" aria-hidden="true">*</span></span>
             <input
               type="text"
               name="name"
               required
               autocomplete="name"
-              class="min-h-[44px] rounded-md border border-border bg-background px-4 py-2.5 text-text transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              class={inputClass}
             />
           </label>
 
-          <label class="flex flex-col gap-1.5">
-            <span class="text-sm font-medium text-text">Email <span class="text-accent" aria-hidden="true">*</span></span>
+          <label class="flex flex-col gap-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Email <span class="text-primary-light" aria-hidden="true">*</span></span>
             <input
               type="email"
               name="email"
               required
               autocomplete="email"
-              class="min-h-[44px] rounded-md border border-border bg-background px-4 py-2.5 text-text transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              class={inputClass}
             />
           </label>
 
-          <label class="flex flex-col gap-1.5">
-            <span class="text-sm font-medium text-text">Phone</span>
+          <label class="flex flex-col gap-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Phone</span>
             <input
               type="tel"
               name="phone"
               autocomplete="tel"
               inputmode="tel"
-              class="min-h-[44px] rounded-md border border-border bg-background px-4 py-2.5 text-text transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              class={inputClass}
             />
           </label>
 
-          <label class="flex flex-col gap-1.5">
-            <span class="text-sm font-medium text-text">Message <span class="text-accent" aria-hidden="true">*</span></span>
+          <label class="flex flex-col gap-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Message <span class="text-primary-light" aria-hidden="true">*</span></span>
             <textarea
               name="message"
               rows="5"
               required
-              class="min-h-[120px] rounded-md border border-border bg-background px-4 py-2.5 text-text transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 resize-y"
+              class={`${inputClass} min-h-[144px] resize-y`}
             ></textarea>
           </label>
 
           <button
             type="submit"
-            class="mt-2 inline-flex min-h-[44px] cursor-pointer items-center justify-center self-start rounded-md bg-accent px-8 py-3 text-base font-bold text-accent-fg shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            class="group mt-2 inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-3 self-start border border-primary bg-primary px-10 py-3 text-sm font-semibold uppercase tracking-[0.28em] text-near-black transition-colors hover:bg-primary-light hover:border-primary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             Send Message
+            <svg class="size-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
           </button>
         </form>
       </div>
 
-      <!-- Contact info sidebar -->
-      <aside class="space-y-8 lg:col-span-2">
+      <aside class="space-y-10 lg:col-span-2 lg:border-l lg:border-primary/20 lg:pl-14">
         <div>
-          <h3 class="font-heading text-lg font-semibold text-text">Call Us</h3>
-          <a href={`tel:${client.phoneForTel}`} class="mt-1 block text-primary-light font-medium transition-colors hover:text-primary">
-            ☎ {client.phoneFormatted}
+          <h3 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Call</h3>
+          <a href={`tel:${client.phoneForTel}`} class="mt-3 flex items-center gap-3 text-text transition-colors hover:text-primary-light">
+            <svg class="size-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            {client.phoneFormatted}
           </a>
         </div>
 
         <div>
-          <h3 class="font-heading text-lg font-semibold text-text">Email Us</h3>
-          <a href={`mailto:${client.email}`} class="mt-1 block text-primary-light font-medium transition-colors hover:text-primary">
-            ✉ {client.email}
+          <h3 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Email</h3>
+          <a href={`mailto:${client.email}`} class="mt-3 flex items-center gap-3 break-all text-text transition-colors hover:text-primary-light">
+            <svg class="size-4 shrink-0 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            {client.email}
           </a>
         </div>
 
         <div>
-          <h3 class="font-heading text-lg font-semibold text-text">Website</h3>
-          <a href={client.domain} target="_blank" rel="noopener noreferrer" class="mt-1 block text-primary-light font-medium transition-colors hover:text-primary">
-            🌐 {client.domain.replace(/^https?:\/\//, '')}
+          <h3 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Website</h3>
+          <a href={client.domain} target="_blank" rel="noopener noreferrer" class="mt-3 flex items-center gap-3 break-all text-text transition-colors hover:text-primary-light">
+            <svg class="size-4 shrink-0 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3a9 9 0 100 18 9 9 0 000-18zm0 0a13 13 0 010 18M3.6 9h16.8M3.6 15h16.8" />
+            </svg>
+            {client.domain.replace(/^https?:\/\//, '')}
           </a>
         </div>
 
         <div>
-          <h3 class="font-heading text-lg font-semibold text-text">Visit Us</h3>
-          <a
-            href={client.address.mapLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-1 block text-text-muted transition-colors hover:text-text"
-          >
-            {client.address.lineOne}<br />
-            {client.address.lineTwo && <>{client.address.lineTwo}<br /></>}
-            {client.address.city}, {client.address.state} {client.address.zip}
-          </a>
+          <h3 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Visit</h3>
+          <div class="mt-3 flex items-start gap-3 text-text-muted">
+            <svg class="mt-1 size-4 shrink-0 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21s7-6.75 7-12a7 7 0 10-14 0c0 5.25 7 12 7 12z" />
+              <circle cx="12" cy="9" r="2.5" stroke-width="1.5" />
+            </svg>
+            {hasConfirmedAddress && client.address.mapLink ? (
+              <a href={client.address.mapLink} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-text">
+                {client.address.lineOne}<br />
+                {client.address.lineTwo && <>{client.address.lineTwo}<br /></>}
+                {client.address.city}, {client.address.state} {client.address.zip}
+              </a>
+            ) : hasConfirmedAddress ? (
+              <span>
+                {client.address.lineOne}<br />
+                {client.address.lineTwo && <>{client.address.lineTwo}<br /></>}
+                {client.address.city}, {client.address.state} {client.address.zip}
+              </span>
+            ) : (
+              <span class="text-xs uppercase tracking-[0.24em]">TODO(owner): supply address.</span>
+            )}
+          </div>
         </div>
 
         <div>
-          <h3 class="font-heading text-lg font-semibold text-text">Hours</h3>
-          <p class="mt-1 text-text-muted">
-            Mon – Fri: 7:00 AM – 6:00 PM<br />
-            Sat: 8:00 AM – 2:00 PM<br />
-            Sun: Closed<br />
-            <span class="font-medium text-accent">24/7 Emergency Service Available</span>
+          <h3 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Hours</h3>
+          <p class="mt-3 text-text-muted">
+            TODO(owner): supply business hours.
           </p>
         </div>
       </aside>
