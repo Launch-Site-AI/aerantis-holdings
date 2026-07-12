@@ -29,30 +29,29 @@ const segments = stripBase(Astro.url.pathname)
   }));
 ---
 
-<section class="bg-primary py-14 sm:py-16 lg:py-20">
+<section class="border-b border-primary/30 bg-surface pt-24 pb-14 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20">
   <div class="mx-auto max-w-site px-4 sm:px-6">
-    <!-- Breadcrumb -->
-    <nav aria-label="Breadcrumb" class="mb-4">
-      <ol class="flex flex-wrap items-center gap-1.5 text-sm text-primary-fg/60">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.24em] text-text-muted">
         <li>
-          <a href={withBase('/')} class="transition-colors hover:text-primary-fg">Home</a>
+          <a href={withBase('/')} class="transition-colors hover:text-primary">Home</a>
         </li>
         {segments.map(({ label, href, isLast }) => (
-          <li class="flex items-center gap-1.5">
-            <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          <li class="flex items-center gap-2">
+            <svg class="size-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
             </svg>
             {isLast ? (
-              <span aria-current="page" class="text-primary-fg">{label}</span>
+              <span aria-current="page" class="text-text">{label}</span>
             ) : (
-              <a href={withBase(href)} class="transition-colors hover:text-primary-fg">{label}</a>
+              <a href={withBase(href)} class="transition-colors hover:text-primary">{label}</a>
             )}
           </li>
         ))}
       </ol>
     </nav>
 
-    <h1 class="font-heading text-h1 font-bold uppercase text-primary-fg">
+    <h1 class="font-heading text-h1 font-medium leading-tight text-text">
       {title}
     </h1>
   </div>
