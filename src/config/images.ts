@@ -22,6 +22,18 @@
  *     skyline/    ← city skyline used behind the hero left column
  *     panel/      ← dark architectural panel used in the hero right column
  *     projects/   ← all project photos (auto-discovered)
+ *   src/assets/logo/
+ *     aerantis-icon.svg      ← "A + wing" mark, currentColor
+ *     aerantis-wordmark.svg  ← AERANTIS + HOLDINGS caption, currentColor
+ *     aerantis-lockup.svg    ← full mark + wordmark, currentColor
+ *
+ * LOGO IMPORT RULES
+ * ─────────────────
+ * Components MUST import logo assets from this file. Do not import
+ * directly from `src/assets/logo/` — that bypasses the single
+ * re-export surface and makes future variant swaps error-prone.
+ * `public/` is reserved for `<link>` / `<meta>` targets (favicons,
+ * OG images); it is not a JS import source.
  *
  * NO REMOTE IMAGES. Only owner-supplied or appropriately licensed local
  * files may be used — see documentation/planning/00-reference-brief-planning.md.
@@ -29,6 +41,24 @@
  */
 
 import type { ImageMetadata } from 'astro';
+
+// ── Logo (owner-approved, delivered by Task 25) ──────────────────────────────
+// Vector SVGs, `fill="currentColor"` — recolour via CSS `color`.
+import logoIconAsset from '../assets/logo/aerantis-icon.svg';
+import logoWordmarkAsset from '../assets/logo/aerantis-wordmark.svg';
+import logoLockupAsset from '../assets/logo/aerantis-lockup.svg';
+
+export const logoIcon: ImageMetadata = logoIconAsset;
+export const logoWordmark: ImageMetadata = logoWordmarkAsset;
+export const logoLockup: ImageMetadata = logoLockupAsset;
+
+/**
+ * Accessible name shared by Header and Footer when the logo is used as
+ * the link to `/`. The anchor should carry an `aria-label` derived
+ * from this constant; the `<img>`/`<Image>` itself uses `alt=""`
+ * (decorative — the anchor already names the destination).
+ */
+export const logoAltText = 'Aerantis Holdings';
 
 // ── Hero (foreground / left-column subject) ───────────────────────────────────
 // Recommended: landscape image, at least 1600 × 1200 px.

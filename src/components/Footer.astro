@@ -1,6 +1,7 @@
 ---
 import { brand } from '../config/brand';
 import { client } from '../data/client';
+import { logoLockup, logoAltText } from '../config/images';
 
 const year = new Date().getFullYear();
 const displayDomain = client.domain.replace(/^https?:\/\//, '');
@@ -9,6 +10,10 @@ const withBase = (path: string) => {
   const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
   return `${normalizedBase}${path.replace(/^\/+/, '')}`;
 };
+
+// Footer lockup: h-14 (56 px), width derived from intrinsic aspect ratio.
+const lockupH = 56;
+const lockupW = Math.round(lockupH * (logoLockup.width / logoLockup.height));
 
 const navCols = [
   {
@@ -38,8 +43,21 @@ const hasAddress = Boolean(
     <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
 
       <div class="sm:col-span-2 lg:col-span-1">
-        <a href={withBase('/')} class="font-heading text-xl font-medium tracking-wide text-text">
-          {brand.name}
+        <a
+          href={withBase('/')}
+          aria-label={`${logoAltText} — Home`}
+          class="inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+        >
+          <img
+            src={logoLockup.src}
+            width={lockupW}
+            height={lockupH}
+            alt=""
+            aria-hidden="true"
+            class="block h-14 w-auto"
+            decoding="async"
+          />
+          <span class="sr-only">{brand.name}</span>
         </a>
         <p class="mt-4 max-w-xs text-sm leading-relaxed">
           {brand.tagline}
