@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Local placeholder — abstract city skyline silhouette.
+  Original geometric composition (rectangles + line), no photographic source.
+  Palette matches src/styles/theme.css: near-black, charcoal, gold.
+  Replace with owner-supplied skyline photography via src/config/images.ts.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder city skyline">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#141416"/>
+      <stop offset="0.55" stop-color="#1a1206"/>
+      <stop offset="1" stop-color="#0B0B0C"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#C9A24A" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#C9A24A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1200" fill="url(#sky)"/>
+  <rect y="720" width="1920" height="200" fill="url(#glow)"/>
+  <line x1="0" y1="900" x2="1920" y2="900" stroke="#C9A24A" stroke-opacity="0.35" stroke-width="1"/>
+
+  <g fill="#0B0B0C">
+    <rect x="40"   y="720" width="90"  height="480"/>
+    <rect x="150"  y="640" width="130" height="560"/>
+    <rect x="300"  y="700" width="70"  height="500"/>
+    <rect x="390"  y="560" width="150" height="640"/>
+    <rect x="560"  y="620" width="80"  height="580"/>
+    <rect x="660"  y="500" width="180" height="700"/>
+    <rect x="860"  y="580" width="110" height="620"/>
+    <rect x="990"  y="440" width="200" height="760"/>
+    <rect x="1210" y="600" width="90"  height="600"/>
+    <rect x="1320" y="520" width="160" height="680"/>
+    <rect x="1500" y="660" width="100" height="540"/>
+    <rect x="1620" y="580" width="140" height="620"/>
+    <rect x="1780" y="700" width="100" height="500"/>
+  </g>
+
+  <g fill="#C9A24A" fill-opacity="0.6">
+    <rect x="410"  y="600" width="4" height="10"/>
+    <rect x="450"  y="640" width="4" height="10"/>
+    <rect x="700"  y="540" width="4" height="10"/>
+    <rect x="760"  y="580" width="4" height="10"/>
+    <rect x="1030" y="500" width="4" height="10"/>
+    <rect x="1080" y="540" width="4" height="10"/>
+    <rect x="1130" y="480" width="4" height="10"/>
+    <rect x="1360" y="580" width="4" height="10"/>
+    <rect x="1420" y="620" width="4" height="10"/>
+    <rect x="1660" y="640" width="4" height="10"/>
+  </g>
+</svg>

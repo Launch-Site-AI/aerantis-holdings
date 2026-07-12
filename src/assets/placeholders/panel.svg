@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Local placeholder — dark architectural panel with vertical divisions.
+  Original geometric composition, no photographic source. Palette matches
+  src/styles/theme.css: near-black, charcoal, gold-muted hairline.
+  Replace with owner-supplied architectural photography via
+  src/config/images.ts.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder architectural panel">
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141416"/>
+      <stop offset="1" stop-color="#0B0B0C"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="1400" fill="url(#panel)"/>
+
+  <g stroke="#8A6E3E" stroke-opacity="0.55" stroke-width="1">
+    <line x1="300"  y1="0" x2="300"  y2="1400"/>
+    <line x1="600"  y1="0" x2="600"  y2="1400"/>
+    <line x1="900"  y1="0" x2="900"  y2="1400"/>
+  </g>
+
+  <g stroke="#C9A24A" stroke-opacity="0.25" stroke-width="1">
+    <line x1="0" y1="240"  x2="1200" y2="240"/>
+    <line x1="0" y1="700"  x2="1200" y2="700"/>
+    <line x1="0" y1="1160" x2="1200" y2="1160"/>
+  </g>
+
+  <g fill="#C9A24A" fill-opacity="0.08">
+    <rect x="60"  y="60"   width="180" height="620"/>
+    <rect x="360" y="60"   width="180" height="620"/>
+    <rect x="660" y="60"   width="180" height="620"/>
+    <rect x="960" y="60"   width="180" height="620"/>
+    <rect x="60"  y="720"  width="180" height="620"/>
+    <rect x="360" y="720"  width="180" height="620"/>
+    <rect x="660" y="720"  width="180" height="620"/>
+    <rect x="960" y="720"  width="180" height="620"/>
+  </g>
+</svg>
