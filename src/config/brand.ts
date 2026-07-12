@@ -14,48 +14,55 @@
 
 export const brand = {
   // ── Site Identity ──────────────────────────────────────────────────────────
+  // TODO(owner): confirm the domain and the exact two-line statement wording.
   name: 'AERANTIS HOLDINGS',
-  tagline: 'Investment • Holdings • Management',
+  tagline: 'Creating Value. Inspiring Confidence.',
   description:
-    'Excellence • Vision • Growth',
+    'Aerantis Holdings provides trusted property solutions, project coordination and tailored support, delivering quality, professionalism and long-term value for every client.',
   url: 'https://aerantisholdings.com.au',
   locale: 'en_US',
 
   // ── Fonts ──────────────────────────────────────────────────────────────────
-  // To swap fonts: change the `name` values here AND update astro.config.mjs
-  // to match (both must stay in sync so Astro can optimise the correct files).
+  // Serif display for editorial headings; sans-serif for body/UI.
+  // Keep this in sync with astro.config.mjs — see documentation/tasks/04-swap-display-font.md.
   fonts: {
     body: 'Inter',
-    display: 'Oswald',
+    display: 'Cormorant Garamond',
   },
 
   // ── Colour Palette ─────────────────────────────────────────────────────────
-  // These values are written to CSS custom properties in theme.css.
-  // Tailwind v4 @theme picks them up automatically.
+  // Near-black + charcoal grounds, warm ivory type, metallic gold accents.
+  // Update src/styles/theme.css to mirror these values (Task 02).
   colors: {
-    primary:      '#1B3A6B',
-    primaryLight: '#2563EB',
-    primaryFg:    '#ffffff',
+    // Metallic gold — used for primary CTAs, active states, gold hairline rules.
+    primary:      '#C9A24A',
+    primaryLight: '#E4C77A',
+    primaryFg:    '#0B0B0C',
 
-    accent:       '#F97316',
-    accentFg:     '#ffffff',
+    // Slightly brighter gold used for accents and eyebrows.
+    accent:       '#D9B564',
+    accentFg:     '#0B0B0C',
 
-    background:   '#ffffff',
-    surface:      '#F8FAFC',
-    border:       '#E2E8F0',
+    // Dark-first neutrals.
+    background:   '#0B0B0C', // near-black page ground
+    surface:      '#141416', // charcoal surface for cards / trust strip
+    border:       '#8A6E3E', // muted gold hairline
 
-    text:         '#0F172A',
-    textMuted:    '#475569',
+    // Warm ivory type.
+    text:         '#F5EEDC',
+    textMuted:    '#B9AE93',
 
-    dark:         '#0F172A',
-    darkSurface:  '#1E293B',
+    // Dark tokens (dark == background here since the site is dark-first).
+    dark:         '#0B0B0C',
+    darkSurface:  '#141416',
   },
 
   // ── Border radius ──────────────────────────────────────────────────────────
+  // Square or barely-softened corners. `full` stays for round social icons.
   radius: {
-    sm:   '0.375rem',
-    md:   '0.625rem',
-    lg:   '1rem',
+    sm:   '0',
+    md:   '2px',
+    lg:   '4px',
     full: '9999px',
   },
 } as const;
