@@ -1,6 +1,4 @@
 ---
-import { client } from '../data/client';
-
 interface Props {
   title?: string;
   description?: string;
@@ -9,9 +7,9 @@ interface Props {
 }
 
 const {
-  title = 'Ready to Get Started?',
-  description = 'Contact us today for a free, no-obligation quote. We\'re here to help with any project — big or small.',
-  buttonText = 'Get Your Free Quote',
+  title = 'Request a Consultation',
+  description = 'Speak with Aerantis about your next property project. TODO(owner): finalise wording.',
+  buttonText = 'Request a Consultation',
   buttonHref = '/contact',
 } = Astro.props;
 
@@ -23,30 +21,29 @@ const withBase = (path: string) => {
 const resolvedButtonHref = buttonHref.startsWith('/') ? withBase(buttonHref) : buttonHref;
 ---
 
-<section class="relative overflow-hidden bg-primary py-16 sm:py-20 lg:py-24">
+<section class="relative border-y border-primary/30 bg-background py-section">
   <div class="mx-auto max-w-site px-4 text-center sm:px-6">
-    <h2 class="font-heading text-h2 font-bold uppercase text-primary-fg">
+    <span class="inline-flex items-center gap-3 text-topper font-semibold uppercase tracking-[0.28em] text-primary">
+      <span class="h-px w-8 bg-primary/60" aria-hidden="true"></span>
+      Aerantis Holdings
+      <span class="h-px w-8 bg-primary/60" aria-hidden="true"></span>
+    </span>
+    <h2 class="mx-auto mt-4 max-w-2xl font-heading text-h2 font-medium leading-tight text-text">
       {title}
     </h2>
-    <p class="mx-auto mt-4 max-w-xl text-primary-fg/80 leading-relaxed">
+    <p class="mx-auto mt-4 max-w-xl text-text-muted leading-relaxed">
       {description}
     </p>
 
-    <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+    <div class="mt-10 flex justify-center">
       <a
         href={resolvedButtonHref}
-        class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-accent px-8 py-3 text-base font-bold text-accent-fg shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        class="group inline-flex min-h-[48px] items-center justify-center gap-3 border border-primary bg-primary px-10 py-3 text-sm font-semibold uppercase tracking-[0.28em] text-near-black transition-colors hover:bg-primary-light hover:border-primary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         {buttonText}
-      </a>
-      <a
-        href={`tel:${client.phoneForTel}`}
-        class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md border-2 border-primary-fg/30 px-8 py-3 text-base font-bold text-primary-fg transition-colors hover:border-primary-fg hover:bg-primary-fg/10"
-      >
-        <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        <svg class="size-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M13 6l6 6-6 6" />
         </svg>
-        Call {client.phoneFormatted}
       </a>
     </div>
   </div>
