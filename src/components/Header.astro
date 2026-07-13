@@ -304,6 +304,12 @@ const lockupW = Math.round(lockupH * (logoLockup.width / logoLockup.height));
       };
       const handleResize = () => setMenuOpen(false);
       const handleScroll = () => syncScrolled();
+      const handleKeydown = (event) => {
+        if (event.key !== 'Escape') return;
+        if (btn.getAttribute('aria-expanded') !== 'true') return;
+        setMenuOpen(false);
+        btn.focus();
+      };
 
       btn.addEventListener('click', handleBtnClick);
       menu.addEventListener('click', handleMenuClick);
@@ -312,6 +318,7 @@ const lockupW = Math.round(lockupH * (logoLockup.width / logoLockup.height));
       document.addEventListener('astro:after-swap', handleAfterSwap);
       window.addEventListener('resize', handleResize);
       window.addEventListener('scroll', handleScroll, { passive: true });
+      document.addEventListener('keydown', handleKeydown);
 
       teardown = () => {
         btn.removeEventListener('click', handleBtnClick);
@@ -321,6 +328,7 @@ const lockupW = Math.round(lockupH * (logoLockup.width / logoLockup.height));
         document.removeEventListener('astro:after-swap', handleAfterSwap);
         window.removeEventListener('resize', handleResize);
         window.removeEventListener('scroll', handleScroll);
+        document.removeEventListener('keydown', handleKeydown);
       };
 
       setMenuOpen(false);
