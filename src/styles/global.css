@@ -3,6 +3,10 @@
 @plugin "@tailwindcss/typography";
 
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -11,6 +15,10 @@
     font-family: var(--font-body);
     background-color: var(--color-background);
     color: var(--color-text);
+    font-feature-settings: 'kern', 'liga', 'calt';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     transition: background-color 0.3s;
   }
 
@@ -18,6 +26,37 @@
     font-family: var(--font-heading);
     line-height: 1.15;
     color: var(--color-text);
+    font-feature-settings: 'kern', 'liga', 'dlig';
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-near-black);
+  }
+
+  ::-moz-selection {
+    background: var(--color-gold);
+    color: var(--color-near-black);
+  }
+
+  /* Global keyboard focus fallback. Component-level Tailwind
+     focus-visible: utilities override colour/offset when present. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* Body-content link defaults. Header, Footer, nav and .btn anchors
+     bring their own styling and are excluded so this rule stays scoped. */
+  a:not(header a):not(footer a):not(nav a):not(.btn) {
+    color: var(--color-primary-light);
+    text-decoration: none;
+    text-underline-offset: 3px;
+  }
+
+  a:not(header a):not(footer a):not(nav a):not(.btn):hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-primary);
   }
 
   /* The site is dark-first; the legacy .dark-mode selector is kept as a
@@ -33,13 +72,36 @@
   body.dark-mode h4, body.dark-mode h5, body.dark-mode h6 {
     color: var(--color-text);
   }
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+/*
+ * Reduced-motion overrides live outside @layer base so their !important
+ * declarations sit at the highest specificity above utility layers.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Reusable utility: subtle metallic hairline. Justified because Hero,
+ * TrustBar and Footer all draw the same rule inline today — centralising
+ * lets owner-side palette edits propagate without hunting through markup.
+ */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--color-border) 50%,
+    transparent 100%
+  );
 }
