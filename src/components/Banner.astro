@@ -1,9 +1,21 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   title: string;
+  eyebrow?: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
 }
 
-const { title } = Astro.props;
+const { title, eyebrow, image, imageAlt } = Astro.props;
+
+if (image && !imageAlt) {
+  throw new Error(
+    `Banner: when 'image' is provided, 'imageAlt' is required (title: ${title}).`,
+  );
+}
 
 const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
 const withBase = (path: string) => {
@@ -29,12 +41,36 @@ const segments = stripBase(Astro.url.pathname)
   }));
 ---
 
-<section class="border-b border-primary/30 bg-surface pt-24 pb-14 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20">
-  <div class="mx-auto max-w-site px-4 sm:px-6">
+<section
+  class:list={[
+    'relative isolate overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24',
+    image ? 'bg-near-black' : 'bg-surface',
+  ]}
+  aria-label="Page header"
+>
+  {image && (
+    <Image
+      src={image}
+      alt={imageAlt!}
+      widths={[640, 960, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+      class="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+    />
+  )}
+
+  {image && (
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-b from-near-black/85 via-near-black/70 to-near-black/95"
+      aria-hidden="true"
+    ></div>
+  )}
+
+  <div class="relative mx-auto max-w-site px-4 sm:px-6">
     <nav aria-label="Breadcrumb" class="mb-6">
       <ol class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.24em] text-text-muted">
         <li>
-          <a href={withBase('/')} class="transition-colors hover:text-primary">Home</a>
+          <a href={withBase('/')} rel="home" class="transition-colors hover:text-primary">Home</a>
         </li>
         {segments.map(({ label, href, isLast }) => (
           <li class="flex items-center gap-2">
@@ -51,8 +87,17 @@ const segments = stripBase(Astro.url.pathname)
       </ol>
     </nav>
 
+    {eyebrow && (
+      <div class="mb-5 flex items-center gap-4">
+        <span class="block h-px w-10 bg-primary" aria-hidden="true"></span>
+        <span class="text-xs font-semibold uppercase tracking-[0.32em] text-primary">{eyebrow}</span>
+      </div>
+    )}
+
     <h1 class="font-heading text-h1 font-medium leading-tight text-text">
       {title}
     </h1>
   </div>
+
+  <div class="gold-rule absolute inset-x-0 bottom-0" aria-hidden="true"></div>
 </section>
