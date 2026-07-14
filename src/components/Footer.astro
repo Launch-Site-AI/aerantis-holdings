@@ -86,7 +86,7 @@ const hasAddress = Boolean(
 
       {navCols.map((col) => (
         <div>
-          <h3 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">{col.title}</h3>
+          <h2 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">{col.title}</h2>
           <ul class="mt-5 space-y-3">
             {col.links.map(({ label, href }) => (
               <li>
@@ -100,7 +100,7 @@ const hasAddress = Boolean(
       ))}
 
       <div>
-        <h3 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Contact</h3>
+        <h2 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Contact</h2>
         <ul class="mt-5 space-y-3 text-sm">
           {client.phoneFormatted && (
             <li class="flex items-start gap-3">
