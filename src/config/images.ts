@@ -44,12 +44,15 @@ import type { ImageMetadata } from 'astro';
 
 // ── Logo (owner-approved, delivered by Task 25) ──────────────────────────────
 // Vector SVGs, `fill="currentColor"` — recolour via CSS `color`.
+// `logoWordmark` is available in `src/assets/logo/aerantis-wordmark.svg` but
+// not currently used by any component. To use it, uncomment the two lines
+// below — otherwise Astro would emit an unused 20 KB asset per build.
 import logoIconAsset from '../assets/logo/aerantis-icon.svg';
-import logoWordmarkAsset from '../assets/logo/aerantis-wordmark.svg';
+// import logoWordmarkAsset from '../assets/logo/aerantis-wordmark.svg';
 import logoLockupAsset from '../assets/logo/aerantis-lockup.svg';
 
 export const logoIcon: ImageMetadata = logoIconAsset;
-export const logoWordmark: ImageMetadata = logoWordmarkAsset;
+// export const logoWordmark: ImageMetadata = logoWordmarkAsset;
 export const logoLockup: ImageMetadata = logoLockupAsset;
 
 /**
