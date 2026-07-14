@@ -17,6 +17,7 @@ interface Props {
   description?: string;
   image?: string;
   schema?: Record<string, unknown>;
+  noindex?: boolean;
 }
 
 const {
@@ -24,6 +25,7 @@ const {
   description = brand.description,
   image = '/og-image.png',
   schema,
+  noindex = false,
 } = Astro.props;
 
 const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
@@ -48,6 +50,7 @@ const imageURL = /^https?:/.test(imagePath)
     <link rel="canonical" href={canonicalURL} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- Open Graph -->
     <meta property="og:type"        content="website" />
