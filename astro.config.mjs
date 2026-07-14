@@ -9,6 +9,14 @@ export default defineConfig({
   base: '/aerantis-holdings',
   output: 'static',
 
+  redirects: {
+    '/reviews': { status: 301, destination: '/aerantis-holdings/' },
+    '/blog': { status: 301, destination: '/aerantis-holdings/' },
+    '/blog/how-to-hire-contractor': { status: 301, destination: '/aerantis-holdings/' },
+    '/blog/signs-you-need-plumber': { status: 301, destination: '/aerantis-holdings/' },
+    '/blog/spring-landscaping-tips': { status: 301, destination: '/aerantis-holdings/' },
+  },
+
   integrations: [sitemap(), robotsTxt()],
 
   fonts: [
