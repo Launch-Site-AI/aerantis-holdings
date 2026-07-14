@@ -17,7 +17,12 @@ export default defineConfig({
     '/blog/spring-landscaping-tips': { status: 301, destination: '/aerantis-holdings/' },
   },
 
-  integrations: [sitemap(), robotsTxt()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/contact/success'),
+    }),
+    robotsTxt(),
+  ],
 
   fonts: [
     {
