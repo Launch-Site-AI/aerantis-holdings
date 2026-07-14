@@ -1,6 +1,7 @@
 ---
 interface TrustItem {
   label: string;
+  description: string;
   /** Inline outlined-SVG path markup — see the defaults below. */
   iconPath: string;
 }
@@ -12,18 +13,21 @@ interface Props {
 const defaultItems: TrustItem[] = [
   {
     label: 'Trusted',
+    description: 'Committed to integrity and transparency',
     // Shield with a check — trust / integrity.
     iconPath:
       '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M12 3l8 3v6c0 4.5-3.2 8.4-8 9-4.8-.6-8-4.5-8-9V6l8-3z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M9 12.5l2 2 4-4.5" />',
   },
   {
     label: 'Professional',
+    description: 'Delivering exceptional standards',
     // Award seal — professionalism / credential.
     iconPath:
       '<circle cx="12" cy="10" r="6" stroke-width="1.25" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M9 15l-1.5 6L12 18.5 16.5 21 15 15" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M9.5 10l1.75 1.75L15 8.5" />',
   },
   {
     label: 'Value Driven',
+    description: 'Focused on long-term growth and success',
     // Rising arrow chart — value / growth.
     iconPath:
       '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M4 20V5" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M4 20h16" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M7 16l4-4 3 3 6-7" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M15 8h5v5" />',
@@ -41,19 +45,26 @@ const { items = defaultItems } = Astro.props;
     class="mx-auto grid max-w-site grid-cols-1 divide-y divide-border/30 md:grid-cols-3 md:divide-x md:divide-y-0"
     role="list"
   >
-    {items.map(({ label, iconPath }) => (
-      <li class="flex items-center justify-center gap-5 px-6 py-8 sm:py-10">
-        <svg
-          class="size-8 shrink-0 text-accent"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+    {items.map(({ label, description, iconPath }) => (
+      <li class="flex flex-col items-center gap-4 px-6 py-12 text-center sm:py-14 lg:py-16">
+        <span
+          class="flex size-12 items-center justify-center rounded-full border border-primary/60 md:size-14"
           aria-hidden="true"
-          set:html={iconPath}
-        />
+        >
+          <svg
+            class="size-6 text-accent"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            set:html={iconPath}
+          />
+        </span>
         <span class="font-heading text-lg font-medium uppercase tracking-[0.3em] text-text">
           {label}
         </span>
+        <p class="mx-auto max-w-[26ch] text-sm leading-relaxed text-text-muted">
+          {description}
+        </p>
       </li>
     ))}
   </ul>
