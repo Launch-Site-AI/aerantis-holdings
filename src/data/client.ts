@@ -19,18 +19,18 @@ export const client = {
    *  as a trust signal. Set to an empty string to hide it. */
   license: '',
   address: {
-    lineOne: '123 Main Street',
-    lineTwo: 'Suite 100',
-    city: 'Denver',
-    state: 'CO',
-    zip: '80206',
-    country: 'US',
-    mapLink: 'https://maps.app.goo.gl/example',
+    lineOne: 'TODO(owner): confirm street address line one',
+    lineTwo: 'TODO(owner): optional suite / floor',
+    city: 'TODO(owner): confirm city',
+    state: 'TODO(owner): confirm state',
+    zip: 'TODO(owner): confirm postcode',
+    country: 'AU',
+    mapLink: '',
   },
   socials: {
-    facebook: 'https://www.facebook.com/',
-    instagram: 'https://www.instagram.com/',
-    google: 'https://www.google.com/maps',
+    facebook: '',
+    instagram: '',
+    google: '',
   },
   domain: 'https://aerantisholdings.com.au',
 } as const;
