@@ -11,28 +11,96 @@ import CTA from '../components/CTA.astro';
 import { brand } from '../config/brand';
 import { client } from '../data/client';
 
-const hasConfirmedAddress = Boolean(client.address.addressLocality);
-const hasConfirmedPhone =
-  client.phoneForTel && !client.phoneForTel.startsWith('TODO(');
+const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
+const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+const siteOrigin = (Astro.site?.toString() ?? brand.url).replace(/\/$/, '');
+const homeUrl = `${siteOrigin}${normalizedBase}`;
+const asset = (path: string) => `${siteOrigin}${normalizedBase}${path.replace(/^\/+/, '')}`;
 
-// TODO(owner): confirm best schema.org @type — Organization vs
-// RealEstateAgent vs ProfessionalService.
+// ─────────────────────────────────────────────────────────────────────────────
+// JSON-LD — Organization
+// ─────────────────────────────────────────────────────────────────────────────
+// Schema shape matches the owner's WhatsApp reply (documentation/planning/
+// 09-owner-respond-information.md § 2). Every field emitted has a visible
+// on-page counterpart per D5 (content-truth rule):
+//
+//   name             → Header wordmark, Hero, Footer
+//   legalName        → Footer bottom-bar compliance line
+//   taxID            → Footer bottom-bar compliance line
+//   telephone (both) → Footer Contact col + Contact-page aside (Task 47)
+//   email            → Footer + Contact aside
+//   address          → Footer + Contact Visit (city / region / country only)
+//   areaServed       → Contact aside "Service Area" row (Task 47)
+//   sameAs           → Footer social row + Contact aside Instagram row
+//
+// availableLanguage is intentionally English-only for now — Step 11
+// (Decision 5) will decide whether to add a visible bilingual line on the
+// Contact page. When that ships, add "Persian" back here so the field
+// keeps content-truth. See TODO(step-11) markers below.
+//
+// Prohibited @types (owner directive): RealEstateAgent, ProfessionalService,
+// ConstructionCompany, HomeAndConstructionBusiness, GeneralContractor,
+// LocalBusiness, Attorney, FinancialService, HomeGoodsStore.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const contactPoints: Record<string, unknown>[] = [];
+if (client.phoneForTel) {
+  contactPoints.push({
+    '@type': 'ContactPoint',
+    telephone: client.phoneForTel,
+    contactType: 'customer service',
+    areaServed: 'AU',
+    // TODO(step-11): add 'Persian' once Contact page carries a visible
+    // bilingual availability line (planning/11 Decision 5).
+    availableLanguage: ['English'],
+  });
+}
+if (client.phoneOfficeForTel) {
+  contactPoints.push({
+    '@type': 'ContactPoint',
+    telephone: client.phoneOfficeForTel,
+    contactType: 'office',
+    areaServed: 'AU',
+    availableLanguage: ['English'],
+  });
+}
+
 const schema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: client.name,
+  '@id': `${homeUrl}#organization`,
+  name: brand.name,
+  legalName: client.legalName,
+  taxID: client.taxId,
+  url: homeUrl,
   email: client.email,
-  url: client.domain,
-};
-if (hasConfirmedPhone) schema.telephone = client.phoneForTel;
-if (hasConfirmedAddress) {
-  schema.address = {
+  telephone: client.phoneForTel,
+  logo: {
+    '@type': 'ImageObject',
+    url: asset('og-image.png'),
+  },
+  image: asset('og-image.png'),
+  address: {
     '@type': 'PostalAddress',
     addressLocality: client.address.addressLocality,
     addressRegion: client.address.addressRegion,
     addressCountry: client.address.addressCountry,
-  };
-}
+  },
+  areaServed: {
+    '@type': 'AdministrativeArea',
+    name: client.serviceArea,
+  },
+  sameAs: [client.socials.instagram].filter(Boolean),
+  contactPoint: contactPoints,
+  // TODO(step-11): populate itemListElement from the reconciled services
+  // list once planning/11 Decision 2 lands. Empty catalog validates today
+  // and gives Step 11 a stable insertion point.
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Services',
+    itemListElement: [],
+  },
+};
 ---
 
 <BaseLayout
