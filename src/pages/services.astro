@@ -9,18 +9,24 @@ import { brand } from '../config/brand';
 const services = [
   {
     title: 'Property Solutions',
+    // TODO(owner): refine — Task-51 first-pass draft.
     description:
-      'Trusted property solutions tailored to each client, from acquisition and holding through to disposition. TODO(owner): describe representative engagements, sectors, and outcomes.',
+      'Practical, day-to-day and long-horizon property support — maintenance, improvements, and facility oversight for a single trusted point of accountability.',
+    subServices: ['Property Maintenance', 'Property Improvements', 'Facility Support'],
   },
   {
     title: 'Project Coordination',
+    // TODO(owner): refine — Task-51 first-pass draft.
     description:
-      'End-to-end coordination across every stage of a project — planning, delivery, and hand-over — with a single point of accountability. TODO(owner): outline the typical project rhythm and the disciplines Aerantis coordinates.',
+      'End-to-end coordination for renovations, discrete projects and portfolio programs, spanning both commercial and residential settings.',
+    subServices: ['Renovation Coordination', 'Project Management', 'Commercial Property Support', 'Residential Property Support'],
   },
   {
-    title: 'Tailored Support',
+    title: 'Client Support',
+    // TODO(owner): refine — Task-51 first-pass draft.
     description:
-      'Dedicated support built around long-term value: discreet advisory, ongoing stewardship, and considered decisions on your behalf. TODO(owner): detail the support cadence and the profile of clients served.',
+      'Considered advice, ongoing consultation and administrative business support delivered with discretion and continuity.',
+    subServices: ['Client Consultation', 'Business Support Services'],
   },
 ];
 
@@ -31,7 +37,7 @@ const icons = [
 ];
 ---
 
-<BaseLayout title="Services" description={`Explore how ${brand.name} approaches property solutions, project coordination, and tailored support.`}>
+<BaseLayout title="Services" description={`Explore how ${brand.name} approaches property solutions, project coordination, and client support.`}>
   <Header slot="header" />
 
   <Banner title="Our Services" eyebrow="What we do" />
@@ -59,7 +65,20 @@ const icons = [
               <svg class="size-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" set:html={icons[i % icons.length]} />
             </div>
             <h3 class="font-heading text-h3 font-medium leading-snug text-text">{service.title}</h3>
-            <p class="mt-3 flex-1 text-sm leading-relaxed text-text-muted">{service.description}</p>
+            <p class="mt-3 text-sm leading-relaxed text-text-muted">{service.description}</p>
+            {service.subServices && service.subServices.length > 0 && (
+              <>
+                <p class="mt-6 text-[10px] font-semibold uppercase tracking-[0.24em] text-primary">Includes</p>
+                <ul class="mt-3 flex-1 space-y-2 text-sm text-text-muted" role="list">
+                  {service.subServices.map((label) => (
+                    <li class="flex items-start gap-2">
+                      <span class="mt-1.5 h-px w-3 shrink-0 bg-primary" aria-hidden="true"></span>
+                      <span>{label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </li>
         ))}
       </ul>

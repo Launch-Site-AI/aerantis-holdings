@@ -92,20 +92,31 @@ const schema: Record<string, unknown> = {
   },
   sameAs: [client.socials.instagram].filter(Boolean),
   contactPoint: contactPoints,
-  // TODO(step-11): populate itemListElement from the reconciled services
-  // list once planning/11 Decision 2 lands. Empty catalog validates today
-  // and gives Step 11 a stable insertion point.
+  // Populated by Task 51 (Step 11 Decision 2). Every Service.name below
+  // matches a visible label on the homepage Services strip or the long-form
+  // Services page. `category` groups sub-services under the 3 headline
+  // capabilities shown on those surfaces.
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Services',
-    itemListElement: [],
+    itemListElement: [
+      { '@type': 'Service', name: 'Property Maintenance',         category: 'Property Solutions' },
+      { '@type': 'Service', name: 'Property Improvements',        category: 'Property Solutions' },
+      { '@type': 'Service', name: 'Facility Support',             category: 'Property Solutions' },
+      { '@type': 'Service', name: 'Renovation Coordination',      category: 'Project Coordination' },
+      { '@type': 'Service', name: 'Project Management',           category: 'Project Coordination' },
+      { '@type': 'Service', name: 'Commercial Property Support',  category: 'Project Coordination' },
+      { '@type': 'Service', name: 'Residential Property Support', category: 'Project Coordination' },
+      { '@type': 'Service', name: 'Client Consultation',          category: 'Client Support' },
+      { '@type': 'Service', name: 'Business Support Services',    category: 'Client Support' },
+    ],
   },
 };
 ---
 
 <BaseLayout
   title={brand.name}
-  description="Aerantis Holdings — trusted property solutions, project coordination, and tailored support, delivering long-term value for every client."
+  description="Aerantis Holdings — trusted property solutions, project coordination, and client support, delivering long-term value for every client."
   schema={schema}
 >
   <Header slot="header" transparent />

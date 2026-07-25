@@ -18,7 +18,7 @@ export const brand = {
   name: 'AERANTIS HOLDINGS',
   tagline: 'Creating Value. Inspiring Confidence.',
   description:
-    'Aerantis Holdings provides trusted property solutions, project coordination and tailored support, delivering quality, professionalism and long-term value for every client.',
+    'Aerantis Holdings provides trusted property solutions, project coordination and client support, delivering quality, professionalism and long-term value for every client.',
   url: 'https://aerantisholdings.com.au',
   locale: 'en_US',
 
