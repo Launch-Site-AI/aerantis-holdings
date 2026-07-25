@@ -39,7 +39,7 @@ export const client = {
    */
   address: {
     addressLocality: 'Melbourne',
-    addressRegion: 'VIC',
+    addressRegion: 'Victoria',
     addressCountry: 'AU',
   },
 
