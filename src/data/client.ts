@@ -50,9 +50,9 @@ export const client = {
   serviceArea: 'Melbourne and surrounding areas, Victoria, Australia',
 
   /**
-   * Contact person. `publishOnSite: false` means the name stays internal —
-   * used for CRM / correspondence only. Step 11 decides whether to surface it
-   * on the Contact page.
+   * Contact person. `publishOnSite: true` surfaces the name on the Contact
+   * page aside; `false` keeps it internal (CRM / correspondence only).
+   * Footer never surfaces the name — Contact page only.
    */
   contactPerson: {
     name: 'Leyli',
