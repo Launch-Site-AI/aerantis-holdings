@@ -57,7 +57,7 @@ export const client = {
   contactPerson: {
     name: 'Leyli',
     role: 'Client Relations & Administration',
-    publishOnSite: false,
+    publishOnSite: true,
   },
 
   /**

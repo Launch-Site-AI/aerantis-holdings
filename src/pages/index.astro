@@ -33,10 +33,10 @@ const asset = (path: string) => `${siteOrigin}${normalizedBase}${path.replace(/^
 //   areaServed       → Contact aside "Service Area" row (Task 47)
 //   sameAs           → Footer social row + Contact aside Instagram row
 //
-// availableLanguage is intentionally English-only for now — Step 11
-// (Decision 5) will decide whether to add a visible bilingual line on the
-// Contact page. When that ships, add "Persian" back here so the field
-// keeps content-truth. See TODO(step-11) markers below.
+// availableLanguage is sourced from client.availableLanguages so a single
+// data edit propagates to both ContactPoint entries and the visible
+// Contact-page "We conduct enquiries in English and Persian." line.
+// D5 (content-truth) held: keep the two in sync when adding a new language.
 //
 // Prohibited @types (owner directive): RealEstateAgent, ProfessionalService,
 // ConstructionCompany, HomeAndConstructionBusiness, GeneralContractor,
@@ -50,9 +50,7 @@ if (client.phoneForTel) {
     telephone: client.phoneForTel,
     contactType: 'customer service',
     areaServed: 'AU',
-    // TODO(step-11): add 'Persian' once Contact page carries a visible
-    // bilingual availability line (planning/11 Decision 5).
-    availableLanguage: ['English'],
+    availableLanguage: [...client.availableLanguages],
   });
 }
 if (client.phoneOfficeForTel) {
@@ -61,7 +59,7 @@ if (client.phoneOfficeForTel) {
     telephone: client.phoneOfficeForTel,
     contactType: 'office',
     areaServed: 'AU',
-    availableLanguage: ['English'],
+    availableLanguage: [...client.availableLanguages],
   });
 }
 

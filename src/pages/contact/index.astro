@@ -22,6 +22,14 @@ const phones = [
 const hasHours = client.businessHours.length > 0;
 const hasInstagram = Boolean(client.socials.instagram);
 const hasServiceArea = Boolean(client.serviceArea);
+const showContactPerson = Boolean(
+  client.contactPerson.publishOnSite && client.contactPerson.name
+);
+const languagesLine = client.availableLanguages.length > 1
+  ? `We conduct enquiries in ${
+      client.availableLanguages.slice(0, -1).join(', ')
+    } and ${client.availableLanguages.slice(-1)[0]}.`
+  : `We conduct enquiries in ${client.availableLanguages[0] ?? 'English'}.`;
 const instagramHandle = client.socials.instagram
   ? `@${client.socials.instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, '').replace(/\/$/, '')}`
   : '';
@@ -46,8 +54,11 @@ const inputClass =
         <h2 class="mt-4 font-heading text-h2 font-medium leading-tight text-text">
           Request a Consultation
         </h2>
+        <p class="mt-4 text-text-muted leading-relaxed">
+          Let's discuss how Aerantis Holdings can support your property and project requirements.
+        </p>
         <p class="mt-4 mb-10 text-text-muted leading-relaxed">
-          Share a few details and Aerantis will be in touch to arrange an initial conversation. TODO(owner): finalise wording and expected response window.
+          Our team is available to answer enquiries and arrange consultations throughout Melbourne.
         </p>
 
         <form
@@ -119,6 +130,19 @@ const inputClass =
       </div>
 
       <aside class="space-y-10 lg:col-span-2 lg:border-l lg:border-primary/20 lg:pl-14">
+        {showContactPerson && (
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Your Contact</h3>
+            <p class="mt-3 text-text">
+              {client.contactPerson.name}
+              <span class="text-text-muted"> — {client.contactPerson.role}</span>
+            </p>
+            <p class="mt-2 text-sm text-text-muted">
+              {languagesLine}
+            </p>
+          </div>
+        )}
+
         <div>
           <h3 class="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Call</h3>
           <ul class="mt-3 space-y-4">
