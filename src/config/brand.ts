@@ -14,7 +14,6 @@
 
 export const brand = {
   // ── Site Identity ──────────────────────────────────────────────────────────
-  // TODO(owner): confirm the domain and the exact two-line statement wording.
   name: 'AERANTIS HOLDINGS',
   tagline: 'Creating Value. Inspiring Confidence.',
   description:

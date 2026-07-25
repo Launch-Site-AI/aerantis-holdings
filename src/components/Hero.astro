@@ -11,6 +11,7 @@ import panelPlaceholder from '../assets/placeholders/panel.svg?url';
 
 interface Props {
   topper?: string;
+  subline?: string;
   headingLines?: [string, string];
   description?: string;
   ctaLabel?: string;
@@ -25,6 +26,7 @@ interface Props {
 
 const {
   topper = 'Professional Property Solutions',
+  subline = '',
   headingLines = ['Creating Value.', 'Inspiring Confidence.'],
   description = brand.description,
   ctaLabel = 'Request a Consultation',
@@ -100,6 +102,12 @@ const resolvedSecondaryHref = secondaryHref.startsWith('/') ? withBase(secondary
           <span class="block">{headingLines[0]}</span>
           <span class="block">{headingLines[1]}</span>
         </h1>
+
+        {subline && (
+          <p class="text-xs font-medium uppercase tracking-[0.28em] text-text-muted">
+            {subline}
+          </p>
+        )}
 
         <p class="max-w-xl text-lead leading-relaxed text-text-muted">
           {description}
