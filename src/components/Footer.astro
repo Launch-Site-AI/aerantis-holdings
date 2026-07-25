@@ -32,10 +32,7 @@ const navCols = [
   },
 ];
 
-const hasAddress = Boolean(
-  client.address.lineOne && !client.address.lineOne.startsWith('TODO')
-    && client.address.city && !client.address.city.startsWith('TODO')
-);
+const hasAddress = Boolean(client.address.addressLocality);
 ---
 
 <footer class="border-t border-primary/30 bg-background text-text-muted" transition:persist>
@@ -133,17 +130,9 @@ const hasAddress = Boolean(
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21s7-6.75 7-12a7 7 0 10-14 0c0 5.25 7 12 7 12z" />
                 <circle cx="12" cy="9" r="2.5" stroke-width="1.5" />
               </svg>
-              {client.address.mapLink ? (
-                <a href={client.address.mapLink} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-text">
-                  {client.address.lineOne}<br />
-                  {client.address.city}, {client.address.state} {client.address.zip}
-                </a>
-              ) : (
-                <span>
-                  {client.address.lineOne}<br />
-                  {client.address.city}, {client.address.state} {client.address.zip}
-                </span>
-              )}
+              <span>
+                {client.address.addressLocality}, {client.address.addressRegion}, {client.address.addressCountry}
+              </span>
             </li>
           )}
         </ul>

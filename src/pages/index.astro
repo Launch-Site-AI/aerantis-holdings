@@ -11,8 +11,7 @@ import CTA from '../components/CTA.astro';
 import { brand } from '../config/brand';
 import { client } from '../data/client';
 
-const hasConfirmedAddress =
-  client.address.lineOne && !client.address.lineOne.startsWith('TODO(');
+const hasConfirmedAddress = Boolean(client.address.addressLocality);
 const hasConfirmedPhone =
   client.phoneForTel && !client.phoneForTel.startsWith('TODO(');
 
@@ -29,11 +28,9 @@ if (hasConfirmedPhone) schema.telephone = client.phoneForTel;
 if (hasConfirmedAddress) {
   schema.address = {
     '@type': 'PostalAddress',
-    streetAddress: client.address.lineOne,
-    addressLocality: client.address.city,
-    addressRegion: client.address.state,
-    postalCode: client.address.zip,
-    addressCountry: client.address.country,
+    addressLocality: client.address.addressLocality,
+    addressRegion: client.address.addressRegion,
+    addressCountry: client.address.addressCountry,
   };
 }
 ---

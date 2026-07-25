@@ -12,8 +12,7 @@ const withBase = (path: string) => {
   return `${normalizedBase}${path.replace(/^\/+/, '')}`;
 };
 
-const hasConfirmedAddress =
-  client.address.lineOne && !client.address.lineOne.startsWith('TODO(');
+const hasConfirmedAddress = Boolean(client.address.addressLocality);
 
 const inputClass =
   'min-h-[48px] w-full border border-primary/30 bg-surface px-4 py-3 text-text placeholder:text-text-muted transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/60';
@@ -145,17 +144,9 @@ const inputClass =
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21s7-6.75 7-12a7 7 0 10-14 0c0 5.25 7 12 7 12z" />
               <circle cx="12" cy="9" r="2.5" stroke-width="1.5" />
             </svg>
-            {hasConfirmedAddress && client.address.mapLink ? (
-              <a href={client.address.mapLink} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-text">
-                {client.address.lineOne}<br />
-                {client.address.lineTwo && <>{client.address.lineTwo}<br /></>}
-                {client.address.city}, {client.address.state} {client.address.zip}
-              </a>
-            ) : hasConfirmedAddress ? (
+            {hasConfirmedAddress ? (
               <span>
-                {client.address.lineOne}<br />
-                {client.address.lineTwo && <>{client.address.lineTwo}<br /></>}
-                {client.address.city}, {client.address.state} {client.address.zip}
+                {client.address.addressLocality}, {client.address.addressRegion}, {client.address.addressCountry}
               </span>
             ) : (
               <span class="text-xs uppercase tracking-[0.24em]">TODO(owner): supply address.</span>
