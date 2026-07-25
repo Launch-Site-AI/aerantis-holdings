@@ -10,16 +10,24 @@ import { aboutImage } from '../config/images';
 
 const principles = [
   {
-    title: 'Considered',
-    body: 'Every project is approached with care, discretion, and long-term intent. TODO(owner): expand.',
+    title: 'Integrity',
+    // TODO(owner): refine — pillar bodies are Task-50 first-pass drafts.
+    body: 'Honest advice, transparent decisions, and outcomes that hold up long after handover.',
   },
   {
-    title: 'Coordinated',
-    body: 'End-to-end coordination keeps every stage of a project on course. TODO(owner): expand.',
+    title: 'Professionalism',
+    // TODO(owner): refine.
+    body: 'Considered engagements delivered with the discipline of a lead-adviser mindset.',
   },
   {
-    title: 'Committed',
-    body: 'A dedicated partner focused on delivering enduring value. TODO(owner): expand.',
+    title: 'Reliability',
+    // TODO(owner): refine.
+    body: 'Consistent follow-through on every commitment, every stage, every project.',
+  },
+  {
+    title: 'Long-term Relationships',
+    // TODO(owner): refine.
+    body: 'Client partnerships that outlast individual projects and compound over time.',
   },
 ];
 ---
@@ -62,10 +70,13 @@ const principles = [
           A considered approach to property.
         </h2>
         <p class="text-text-muted leading-relaxed">
-          TODO(owner): a paragraph introducing Aerantis Holdings — origin, focus, and the kind of clients we work with.
+          Aerantis Holdings provides professional property solutions, project coordination and client-focused support throughout Melbourne.
         </p>
         <p class="text-text-muted leading-relaxed">
-          TODO(owner): a second paragraph on the way Aerantis operates — discretion, discipline, and the long view on value.
+          We believe successful projects begin with trust, clear communication and attention to detail.
+        </p>
+        <p class="text-text-muted leading-relaxed">
+          Rather than offering one standard solution, we work closely with every client to deliver practical, tailored outcomes that reflect their goals and expectations.
         </p>
       </div>
     </div>
@@ -80,11 +91,11 @@ const principles = [
           <span class="h-px w-8 bg-primary/60" aria-hidden="true"></span>
         </span>
         <h2 class="mt-4 font-heading text-h2 font-medium leading-tight text-text">
-          How we work.
+          Our commitment is built on…
         </h2>
       </div>
 
-      <ul class="grid grid-cols-1 gap-px bg-border md:grid-cols-3" role="list">
+      <ul class="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-4" role="list">
         {principles.map(({ title, body }) => (
           <li class="bg-background p-8">
             <div class="mb-6 h-px w-10 bg-primary" aria-hidden="true"></div>
@@ -94,9 +105,10 @@ const principles = [
         ))}
       </ul>
 
-      <p class="mt-12 text-center text-xs uppercase tracking-[0.28em] text-text-muted">
-        TODO(owner): supply team profiles to reinstate the "Our Team" section.
-      </p>
+      {/* Team section deliberately omitted — owner reply did not supply team
+          profiles. Task 50 removes the visible placeholder that previously
+          appeared on the deployed page. To reinstate later, add a `team`
+          array and render a section here. */}
     </div>
   </section>
 
