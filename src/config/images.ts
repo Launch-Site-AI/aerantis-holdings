@@ -69,10 +69,10 @@ export const logoAltText = 'Aerantis Holdings';
 export const heroImage: ImageMetadata | undefined = undefined;
 
 // ── About ─────────────────────────────────────────────────────────────────────
-// Recommended: portrait or square, at least 900 × 700 px.
-// Current asset is landscape 1099 × 444 (~2.47:1) — About surfaces use
-// aspect-[5/2] to match. Update both if aspect changes.
-import aboutImageAsset from '../assets/images/about/about.jpg';
+// Recommended: 16:9 or taller, at least 1200 × 675 px.
+// Current asset is a 4:3 editorial meeting image (1448 × 1086); About
+// surfaces use a 16:9 frame, preserving sufficient crop room for all breakpoints.
+import aboutImageAsset from '../assets/images/about/about-v2.jpg';
 export const aboutImage: ImageMetadata | undefined = aboutImageAsset;
 
 // ── Hero skyline (behind the left content column) ─────────────────────────────

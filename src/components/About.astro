@@ -45,12 +45,12 @@ const resolvedCtaHref = ctaHref.startsWith('/') ? withBase(ctaHref) : ctaHref;
   <div class="mx-auto grid max-w-site grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
 
     <!-- Image / fallback panel -->
-    <div class="relative aspect-[5/2] overflow-hidden border border-border/60">
+    <div class="relative aspect-video overflow-hidden border border-border/60">
       {imageSrc ? (
         <Image
           src={imageSrc}
           alt={imageAlt}
-          widths={[480, 720, 960, 1099]}
+          widths={[480, 720, 960, 1448]}
           sizes="(min-width: 1024px) 50vw, 100vw"
           loading="lazy"
           decoding="async"
