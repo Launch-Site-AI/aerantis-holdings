@@ -34,7 +34,7 @@ const {
   secondaryLabel = 'Explore Services',
   secondaryHref = '/services',
   skyline = ownerSkyline,
-  skylineAlt = 'City skyline at sunset',
+  skylineAlt = 'Melbourne skyline at sunset',
   panel = ownerPanel,
   panelAlt = 'Architectural panel',
 } = Astro.props;
@@ -61,8 +61,8 @@ const resolvedSecondaryHref = secondaryHref.startsWith('/') ? withBase(secondary
           <Image
             src={skyline}
             alt={skylineAlt}
-            width={1920}
-            height={1200}
+            widths={[480, 720, 960, 1280, 1600]}
+            sizes="(min-width: 1024px) 60vw, 100vw"
             loading="eager"
             decoding="async"
             class="size-full object-cover"

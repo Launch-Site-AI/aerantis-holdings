@@ -77,8 +77,11 @@ export const aboutImage: ImageMetadata | undefined = aboutImageAsset;
 
 // ── Hero skyline (behind the left content column) ─────────────────────────────
 // Recommended: dark cityscape at sunset, at least 1920 × 1200 px, landscape.
-// import skylineImage from '../assets/images/skyline/skyline.jpg';
-export const skylineImage: ImageMetadata | undefined = undefined;
+// Current asset: Melbourne skyline (Yarra River / Princes Bridge), 955 × 572.
+// Slightly upscaled at large viewports; dark editorial overlay in Hero.astro
+// hides any softness. Replace with a higher-res original when available.
+import skylineImageAsset from '../assets/images/skyline/skyline.jpg';
+export const skylineImage: ImageMetadata | undefined = skylineImageAsset;
 
 // ── Hero architectural panel (right column) ───────────────────────────────────
 // Recommended: dark architectural elevation, at least 1200 × 1400 px, portrait.
