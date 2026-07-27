@@ -5,16 +5,15 @@ import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 
 export default defineConfig({
-  site: 'https://launch-site-ai.github.io',
-  base: '/aerantis-holdings',
+  site: 'https://aerantisholdings.com.au',
   output: 'static',
 
   redirects: {
-    '/reviews': { status: 301, destination: '/aerantis-holdings/' },
-    '/blog': { status: 301, destination: '/aerantis-holdings/' },
-    '/blog/how-to-hire-contractor': { status: 301, destination: '/aerantis-holdings/' },
-    '/blog/signs-you-need-plumber': { status: 301, destination: '/aerantis-holdings/' },
-    '/blog/spring-landscaping-tips': { status: 301, destination: '/aerantis-holdings/' },
+    '/reviews': { status: 301, destination: '/' },
+    '/blog': { status: 301, destination: '/' },
+    '/blog/how-to-hire-contractor': { status: 301, destination: '/' },
+    '/blog/signs-you-need-plumber': { status: 301, destination: '/' },
+    '/blog/spring-landscaping-tips': { status: 301, destination: '/' },
   },
 
   integrations: [
