@@ -44,8 +44,8 @@ const resolvedCtaHref = ctaHref.startsWith('/') ? withBase(ctaHref) : ctaHref;
 <section class="bg-background py-section">
   <div class="mx-auto grid max-w-site grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
 
-    <!-- Image / fallback panel -->
-    <div class="relative aspect-video overflow-hidden border border-border/60">
+    <!-- Image / fallback panel — aspect-video (16:9) grown by +40% vertical -->
+    <div class="relative aspect-[80/63] overflow-hidden border border-border/60">
       {imageSrc ? (
         <Image
           src={imageSrc}
