@@ -70,8 +70,10 @@ export const heroImage: ImageMetadata | undefined = undefined;
 
 // ── About ─────────────────────────────────────────────────────────────────────
 // Recommended: portrait or square, at least 900 × 700 px.
-// import aboutImage from '../assets/images/about/about.jpg';
-export const aboutImage: ImageMetadata | undefined = undefined;
+// Current asset is landscape 1099 × 444 (~2.47:1) — About surfaces use
+// aspect-[5/2] to match. Update both if aspect changes.
+import aboutImageAsset from '../assets/images/about/about.jpg';
+export const aboutImage: ImageMetadata | undefined = aboutImageAsset;
 
 // ── Hero skyline (behind the left content column) ─────────────────────────────
 // Recommended: dark cityscape at sunset, at least 1920 × 1200 px, landscape.
