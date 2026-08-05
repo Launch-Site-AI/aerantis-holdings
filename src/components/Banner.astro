@@ -16,29 +16,6 @@ if (image && !imageAlt) {
     `Banner: when 'image' is provided, 'imageAlt' is required (title: ${title}).`,
   );
 }
-
-const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
-const withBase = (path: string) => {
-  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-  return `${normalizedBase}${path.replace(/^\/+/, '')}`;
-};
-const stripBase = (path: string) => {
-  const base = baseUrl;
-  if (base !== '/' && path.startsWith(base)) {
-    const stripped = path.slice(base.length);
-    return stripped ? `/${stripped.replace(/^\//, '')}` : '/';
-  }
-  return path;
-};
-
-const segments = stripBase(Astro.url.pathname)
-  .split('/')
-  .filter(Boolean)
-  .map((seg, i, arr) => ({
-    label: seg.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
-    href: '/' + arr.slice(0, i + 1).join('/'),
-    isLast: i === arr.length - 1,
-  }));
 ---
 
 <section
@@ -67,26 +44,6 @@ const segments = stripBase(Astro.url.pathname)
   )}
 
   <div class="relative mx-auto max-w-site px-4 sm:px-6">
-    <nav aria-label="Breadcrumb" class="mb-6">
-      <ol class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.24em] text-text-muted">
-        <li>
-          <a href={withBase('/')} rel="home" class="transition-colors hover:text-primary">Home</a>
-        </li>
-        {segments.map(({ label, href, isLast }) => (
-          <li class="flex items-center gap-2">
-            <svg class="size-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-            </svg>
-            {isLast ? (
-              <span aria-current="page" class="text-text">{label}</span>
-            ) : (
-              <a href={withBase(href)} class="transition-colors hover:text-primary">{label}</a>
-            )}
-          </li>
-        ))}
-      </ol>
-    </nav>
-
     {eyebrow && (
       <div class="mb-5 flex items-center gap-4">
         <span class="block h-px w-10 bg-primary" aria-hidden="true"></span>
