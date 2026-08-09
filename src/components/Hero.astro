@@ -36,7 +36,7 @@ const {
   skyline = ownerSkyline,
   skylineAlt = 'Melbourne skyline at sunset',
   panel = ownerPanel,
-  panelAlt = 'Architectural panel',
+  panelAlt = 'Aerantis project coordination on-site — blueprint review during a workplace fit-out',
 } = Astro.props;
 
 const baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
@@ -137,8 +137,8 @@ const resolvedSecondaryHref = secondaryHref.startsWith('/') ? withBase(secondary
           <Image
             src={panel}
             alt={panelAlt}
-            width={1200}
-            height={1400}
+            widths={[480, 720, 960, 1280, 1600]}
+            sizes="(min-width: 1024px) 40vw, 0px"
             loading="eager"
             decoding="async"
             class="size-full object-cover"
