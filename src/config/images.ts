@@ -84,10 +84,12 @@ import skylineImageAsset from '../assets/images/skyline/skyline.jpg';
 export const skylineImage: ImageMetadata | undefined = skylineImageAsset;
 
 // ── Hero architectural panel (right column) ───────────────────────────────────
-// Recommended: dark architectural elevation, at least 1200 × 1400 px, portrait.
-// Current asset: on-site project-coordination scene (blueprint review + fit-out
-// in progress), 1600 × 900 (16:9 landscape). Cropped by the tall right column
-// via object-cover — subject stays centred at the 40% column width.
+// Recommended: portrait or near-square, at least 1200 × 1600 px, so object-cover
+// crops minimally on tall viewports.
+// Current asset: on-site project-coordination scene composed vertically
+// (engineers with blueprint centre-left, worker on ladder mid-ground, tools +
+// materials foreground), 1163 × 1353 (~6:7 portrait, near-square). Centre-crop
+// keeps every subject in frame at all tested viewport heights.
 import panelImageAsset from '../assets/images/panel/panel.jpg';
 export const panelImage: ImageMetadata | undefined = panelImageAsset;
 
